@@ -1,7 +1,8 @@
-FROM node:12.2.0-alpine
-WORKDIR app
-COPY . .
+# Dockerfile
+FROM node:20
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-RUN npm run test
-EXPOSE 8000
-CMD ["node","app.js"]
+COPY . .
+EXPOSE 8080
+CMD ["node", "index.js"]
