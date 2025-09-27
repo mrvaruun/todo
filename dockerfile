@@ -1,17 +1,17 @@
-# Use Node.js 20 base image
+# Use Node.js base image
 FROM node:20
 
 # Set working directory inside container
 WORKDIR /app
 
-# Copy package.json and package-lock.json if exists
-COPY package*.json ./
+# Copy package.json and package-lock.json from app folder
+COPY app/package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy all app files
-COPY . .
+# Copy app folder contents
+COPY app ./
 
 # Expose port
 EXPOSE 8080
