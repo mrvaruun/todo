@@ -1,21 +1,10 @@
-# Use Node.js base image
-FROM node:20
 
-# Set working directory inside container
-WORKDIR /app
+FROM python:3
+RUN pip install django==3.2
 
-# Copy package.json and package-lock.json from app folder
-COPY app/package*.json ./
+COPY . .
 
-# Install dependencies
-RUN npm install
-
-# Copy app folder contents
-COPY app ./
-
-# Expose port
-EXPOSE 8080
-
-# Start app
-CMD ["node", "index.js"]
+RUN python manage.py migrate
+EXPOSE 8000
+CMD ["python","manage.py","runserver","0.0.0.0:8000"]
 
